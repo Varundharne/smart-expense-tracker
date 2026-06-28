@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Budget</title>
+</head>
+<body>
+
+<h1>Set Monthly Budget</h1>
+
+<form method="POST">
+    <input type="number"
+           name="amount"
+           placeholder="Enter Budget"
+           required>
+
+    <button type="submit">
+        Save Budget
+    </button>
+</form>
+
+{% if budget %}
+<h3>Current Budget : ₹{{ budget.amount }}</h3>
+{% endif %}
+
+<br>
+
+<a href="/dashboard">
+    Back to Dashboard
+</a>
+
+</body>
+</html>

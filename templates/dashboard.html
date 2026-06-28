@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Dashboard</title>
+</head>
+<body>
+
+<h1>Welcome {{ session['name'] }}</h1>
+
+<h2>Total Expenses : ₹{{ total }}</h2>
+<h2>Monthly Budget : ₹{{ budget }}</h2>
+<h2>Remaining Budget : ₹{{ remaining }}</h2>
+
+<a href="/budget">Set Budget</a> |
+<a href="/reports">Reports</a>
+
+<hr>
+
+<h2>Expense History</h2>
+
+<table border="1">
+    <tr>
+        <th>Amount</th>
+        <th>Category</th>
+        <th>Description</th>
+    </tr>
+
+    {% for e in expenses %}
+    <tr>
+        <td>₹{{ e.amount }}</td>
+        <td>{{ e.category }}</td>
+        <td>{{ e.description }}</td>
+    </tr>
+    {% endfor %}
+</table>
+
+</body>
+</html>
