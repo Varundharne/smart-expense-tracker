@@ -25,13 +25,6 @@ def dashboard():
     if "user_id" not in session:
         return redirect("/login")
 
-    return render_template("dashboard.html")
-
-    if "user_id" not in session:
-        # Temporary session for testing
-        session["user_id"] = 1
-        session["name"] = "Varun"
-
     conn = get_db()
 
     expenses = conn.execute(
@@ -62,7 +55,8 @@ def dashboard():
         expenses=expenses,
         total=total,
         budget=budget_amount,
-        remaining=remaining
+        remaining=remaining,
+        name=session["name"]
     )
 
 
