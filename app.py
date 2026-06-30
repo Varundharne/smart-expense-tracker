@@ -150,3 +150,29 @@ def register():
         return redirect("/login")
 
     return render_template("register.html")
+
+@app.route("/login", methods=["GET", "POST"])
+def login():
+
+    if request.method == "POST":
+
+        email = request.form["email"]
+        password = request.form["password"]
+
+        conn = get_db()
+
+        user = conn.execute(
+            "SELECT * FROM users WHERE email=? AND password=?",
+            (email, password)
+        ).fetchone()
+
+        conn.close()
+
+        if user:
+            session["user_id"] = user["id"]
+            session["name"] = user["full_name"]
+            return redirect("/dashboard")
+
+        return "Invalid Email or Password"
+
+    return render_template("login.html")
