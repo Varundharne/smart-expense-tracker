@@ -132,6 +132,21 @@ if __name__ == "__main__":
 def register():
 
     if request.method == "POST":
-        return "Registration Successful"
+
+        name = request.form["name"]
+        email = request.form["email"]
+        password = request.form["password"]
+
+        conn = get_db()
+
+        conn.execute(
+            "INSERT INTO users(full_name,email,password) VALUES(?,?,?)",
+            (name, email, password)
+        )
+
+        conn.commit()
+        conn.close()
+
+        return redirect("/login")
 
     return render_template("register.html")
