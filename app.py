@@ -26,8 +26,7 @@ def dashboard():
         return redirect("/login")
 
     return render_template("dashboard.html")
-@app.route("/dashboard")
-def dashboard():
+
     if "user_id" not in session:
         # Temporary session for testing
         session["user_id"] = 1
@@ -131,10 +130,6 @@ def reports():
         expenses=expenses
     )
 
-
-if __name__ == "__main__":
-    app.run(debug=True)
-
 @app.route("/register", methods=["GET", "POST"])
 def register():
 
@@ -183,3 +178,9 @@ def login():
         return "Invalid Email or Password"
 
     return render_template("login.html")
+@app.route("/logout")
+def logout():
+    session.clear()
+    return redirect("/login")
+if __name__ == "__main__":
+    app.run(debug=True)
