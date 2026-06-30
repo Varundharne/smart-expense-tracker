@@ -129,43 +129,45 @@ def register():
 
     if request.method == "POST":
 
-    name = request.form["name"].strip()
-    email = request.form["email"].strip()
-    password = request.form["password"].strip()
+        name = request.form["name"].strip()
+        email = request.form["email"].strip()
+        password = request.form["password"].strip()
 
-    if not name or not email or not password:
-        return "All fields are required!"
+        if not name or not email or not password:
+            return "All fields are required!"
 
         conn = get_db()
 
-existing_user = conn.execute(
-    "SELECT * FROM users WHERE email=?",
-    (email,)
-).fetchone()
+        existing_user = conn.execute(
+            "SELECT * FROM users WHERE email=?",
+            (email,)
+        ).fetchone()
 
-if existing_user:
-    conn.close()
-    return "Email already registered!"
+        if existing_user:
+            conn.close()
+            return "Email already registered!"
 
-conn.execute(
-    "INSERT INTO users(full_name, email, password) VALUES (?, ?, ?)",
-    (name, email, password)
-)
+        conn.execute(
+            "INSERT INTO users(full_name, email, password) VALUES (?, ?, ?)",
+            (name, email, password)
+        )
 
-conn.commit()
-conn.close()
+        conn.commit()
+        conn.close()
 
-return redirect("/login")
+        return redirect("/login")
 
     return render_template("register.html")
 
 @app.route("/login", methods=["GET", "POST"])
 def login():
 
+    error = None
+
     if request.method == "POST":
 
-        email = request.form["email"]
-        password = request.form["password"]
+        email = request.form["email"].strip()
+        password = request.form["password"].strip()
 
         conn = get_db()
 
@@ -181,9 +183,9 @@ def login():
             session["name"] = user["full_name"]
             return redirect("/dashboard")
 
-        return "Invalid Email or Password"
+        error = "Invalid email or password."
 
-    return render_template("login.html")
+    return render_template("login.html", error=error)
 @app.route("/logout")
 def logout():
     session.clear()
