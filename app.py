@@ -128,7 +128,10 @@ def reports():
 if __name__ == "__main__":
     app.run(debug=True)
 
-@app.route("/register")
+@app.route("/register", methods=["GET", "POST"])
 def register():
+
+    if request.method == "POST":
+        return "Registration Successful"
+
     return render_template("register.html")
-from flask import Flask, render_template
