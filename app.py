@@ -21,10 +21,9 @@ def home():
 # Dashboard
 @app.route("/dashboard")
 def dashboard():
+
     if "user_id" not in session:
-        # Temporary session for testing
-        session["user_id"] = 1
-        session["name"] = "Varun"
+        return redirect("/login")
 
     conn = get_db()
 
@@ -56,7 +55,8 @@ def dashboard():
         expenses=expenses,
         total=total,
         budget=budget_amount,
-        remaining=remaining
+        remaining=remaining,
+        name=session["name"]
     )
 
 
@@ -124,6 +124,71 @@ def reports():
         expenses=expenses
     )
 
+@app.route("/register", methods=["GET", "POST"])
+def register():
 
+    if request.method == "POST":
+
+        name = request.form["name"].strip()
+        email = request.form["email"].strip()
+        password = request.form["password"].strip()
+
+        if not name or not email or not password:
+            return "All fields are required!"
+
+        conn = get_db()
+
+        existing_user = conn.execute(
+            "SELECT * FROM users WHERE email=?",
+            (email,)
+        ).fetchone()
+
+        if existing_user:
+            conn.close()
+            return "Email already registered!"
+
+        conn.execute(
+            "INSERT INTO users(full_name, email, password) VALUES (?, ?, ?)",
+            (name, email, password)
+        )
+
+        conn.commit()
+        conn.close()
+
+        return redirect("/login")
+
+    return render_template("register.html")
+
+@app.route("/login", methods=["GET", "POST"])
+def login():
+
+    error = None
+
+    if request.method == "POST":
+
+        email = request.form["email"].strip()
+        password = request.form["password"].strip()
+
+        conn = get_db()
+
+        user = conn.execute(
+            "SELECT * FROM users WHERE email=? AND password=?",
+            (email, password)
+        ).fetchone()
+
+        conn.close()
+
+        if user:
+            session["user_id"] = user["id"]
+            session["name"] = user["full_name"]
+            return redirect("/dashboard")
+
+        error = "Invalid email or password."
+
+    return render_template("login.html", error=error)
+@app.route("/logout")
+def logout():
+    session.clear()
+    return redirect("/login")
 if __name__ == "__main__":
     app.run(debug=True)
