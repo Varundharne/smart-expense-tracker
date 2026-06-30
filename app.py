@@ -21,6 +21,13 @@ def home():
 # Dashboard
 @app.route("/dashboard")
 def dashboard():
+
+    if "user_id" not in session:
+        return redirect("/login")
+
+    return render_template("dashboard.html")
+@app.route("/dashboard")
+def dashboard():
     if "user_id" not in session:
         # Temporary session for testing
         session["user_id"] = 1
