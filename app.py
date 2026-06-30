@@ -129,21 +129,33 @@ def register():
 
     if request.method == "POST":
 
-        name = request.form["name"]
-        email = request.form["email"]
-        password = request.form["password"]
+    name = request.form["name"].strip()
+    email = request.form["email"].strip()
+    password = request.form["password"].strip()
+
+    if not name or not email or not password:
+        return "All fields are required!"
 
         conn = get_db()
 
-        conn.execute(
-            "INSERT INTO users(full_name,email,password) VALUES(?,?,?)",
-            (name, email, password)
-        )
+existing_user = conn.execute(
+    "SELECT * FROM users WHERE email=?",
+    (email,)
+).fetchone()
 
-        conn.commit()
-        conn.close()
+if existing_user:
+    conn.close()
+    return "Email already registered!"
 
-        return redirect("/login")
+conn.execute(
+    "INSERT INTO users(full_name, email, password) VALUES (?, ?, ?)",
+    (name, email, password)
+)
+
+conn.commit()
+conn.close()
+
+return redirect("/login")
 
     return render_template("register.html")
 
