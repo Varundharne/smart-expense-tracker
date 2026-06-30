@@ -131,4 +131,4 @@ if __name__ == "__main__":
 @app.route("/register")
 def register():
     return render_template("register.html")
-
+from flask import Flask, render_template
