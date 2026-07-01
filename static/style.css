@@ -1,42 +1,146 @@
-body {
-    font-family: Arial, sans-serif;
-    background-color: #f4f4f4;
-    margin: 0;
-    padding: 20px;
+/* General */
+body{
+    margin:0;
+    padding:0;
+    font-family:Arial, Helvetica, sans-serif;
+    background:#f4f6f9;
 }
 
-.container {
-    width: 400px;
-    margin: auto;
-    background: white;
-    padding: 20px;
-    border-radius: 8px;
+/* Container */
+.container{
+    width:450px;
+    margin:50px auto;
+    background:#fff;
+    padding:30px;
+    border-radius:10px;
+    box-shadow:0 5px 15px rgba(0,0,0,0.2);
 }
 
-h2 {
-    text-align: center;
-    color: #333;
+/* Headings */
+h1,h2{
+    text-align:center;
+    color:#2c3e50;
 }
 
-input {
-    width: 95%;
-    padding: 10px;
-    margin: 8px 0;
+/* Form */
+form{
+    margin-top:20px;
 }
 
-button {
-    width: 100%;
-    padding: 10px;
-    background: #007BFF;
-    color: white;
-    border: none;
-    cursor: pointer;
+label{
+    font-weight:bold;
+    color:#333;
 }
 
-button:hover {
-    background: #0056b3;
+input,select{
+    width:100%;
+    padding:12px;
+    margin:8px 0 18px 0;
+    border:1px solid #ccc;
+    border-radius:6px;
+    box-sizing:border-box;
+    font-size:15px;
 }
 
-a {
-    text-decoration: none;
+input:focus{
+    outline:none;
+    border:1px solid #3498db;
+}
+
+/* Buttons */
+button{
+    width:100%;
+    padding:12px;
+    background:#3498db;
+    color:white;
+    border:none;
+    border-radius:6px;
+    font-size:16px;
+    cursor:pointer;
+    transition:0.3s;
+}
+
+button:hover{
+    background:#2980b9;
+}
+
+/* Links */
+a{
+    text-decoration:none;
+    color:#3498db;
+}
+
+a:hover{
+    text-decoration:underline;
+}
+
+/* Dashboard Cards */
+.card{
+    background:white;
+    padding:20px;
+    margin:15px auto;
+    width:80%;
+    border-radius:10px;
+    box-shadow:0 4px 10px rgba(0,0,0,.15);
+}
+
+.card h3{
+    margin:0;
+    color:#2c3e50;
+}
+
+/* Table */
+table{
+    width:90%;
+    margin:auto;
+    border-collapse:collapse;
+    background:white;
+    box-shadow:0 4px 10px rgba(0,0,0,.15);
+}
+
+table th{
+    background:#3498db;
+    color:white;
+    padding:12px;
+}
+
+table td{
+    padding:12px;
+    text-align:center;
+    border-bottom:1px solid #ddd;
+}
+
+table tr:hover{
+    background:#f2f2f2;
+}
+
+/* Navigation */
+.navbar{
+    background:#2c3e50;
+    padding:15px;
+    text-align:center;
+}
+
+.navbar a{
+    color:white;
+    margin:0 15px;
+    font-weight:bold;
+}
+
+.navbar a:hover{
+    color:#f1c40f;
+}
+
+/* Error Message */
+.error{
+    color:red;
+    text-align:center;
+    margin-bottom:15px;
+}
+
+/* Success Message */
+.success{
+    color:green;
+    text-align:center;
+    margin-bottom:15px;
 }
