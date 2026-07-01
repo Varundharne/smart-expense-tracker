@@ -5,6 +5,7 @@
     <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
 </head>
 <body>
+     <div class="container">
 
 <h1>Welcome {{ session['name'] }}</h1>
 
@@ -56,5 +57,6 @@
 <a href="/logout">
     <button>Logout</button>
 </a>
+     </div>
 </body>
 </html>
