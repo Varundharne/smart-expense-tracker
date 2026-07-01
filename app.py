@@ -190,5 +190,39 @@ def login():
 def logout():
     session.clear()
     return redirect("/login")
+
+@app.route("/add-expense", methods=["GET", "POST"])
+def add_expense():
+
+    if "user_id" not in session:
+        return redirect("/login")
+
+    if request.method == "POST":
+
+        amount = request.form["amount"]
+        category = request.form["category"]
+        description = request.form["description"]
+
+        conn = get_db()
+
+        conn.execute(
+            """
+            INSERT INTO expenses(user_id, amount, category, description)
+            VALUES (?, ?, ?, ?)
+            """,
+            (
+                session["user_id"],
+                amount,
+                category,
+                description
+            )
+        )
+
+        conn.commit()
+        conn.close()
+
+        return redirect("/dashboard")
+
+    return render_template("add_expense.html")
 if __name__ == "__main__":
     app.run(debug=True)
