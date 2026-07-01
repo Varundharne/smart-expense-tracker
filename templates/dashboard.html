@@ -16,23 +16,42 @@
 <a href="/reports">Reports</a>
 
 <hr>
+    <a href="/add-expense">
+    <button>Add Expense</button>
+</a>
+
+<br><br>
 
 <h2>Expense History</h2>
 
-<table border="1">
+<table border="1" cellpadding="10">
+
     <tr>
         <th>Amount</th>
         <th>Category</th>
         <th>Description</th>
     </tr>
 
-    {% for e in expenses %}
-    <tr>
-        <td>₹{{ e.amount }}</td>
-        <td>{{ e.category }}</td>
-        <td>{{ e.description }}</td>
-    </tr>
-    {% endfor %}
+    {% if expenses %}
+
+        {% for e in expenses %}
+        <tr>
+            <td>₹{{ e.amount }}</td>
+            <td>{{ e.category }}</td>
+            <td>{{ e.description }}</td>
+        </tr>
+        {% endfor %}
+
+    {% else %}
+
+        <tr>
+            <td colspan="3" align="center">
+                No expenses added yet.
+            </td>
+        </tr>
+
+    {% endif %}
+
 </table>
 <a href="/logout">
     <button>Logout</button>
