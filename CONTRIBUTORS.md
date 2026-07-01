@@ -1,11 +1,18 @@
-# Contributors
+## Contributors
 
-## Team 9 – Smart Expense Tracker for Students
+### Varun Dharne
+- Dashboard Development
+- Expense Reports and Analytics
+- Data Visualization (Charts and Summaries)
+- README Documentation
+- Project Presentation
+- GitHub Repository Management
 
 ### Mohammed Dada Khalandar
-- Authentication System
 - User Registration
 - User Login
 - Session Management
-- Logout
-- Validation
+- Logout Functionality
+- Registration Validation
+- Login Error Handling
+- Database Design
