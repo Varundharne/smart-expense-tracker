@@ -53,4 +53,6 @@ Mohammed Dada Khalandar
 \- User Registration and Login System
 
 \- Database Design
-
+Yogesh BL
+Expense Management
+UI Development
