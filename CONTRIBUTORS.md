@@ -16,7 +16,8 @@
 - Registration Validation
 - Login Error Handling
 - Database Design
-###Yogesh BL
--Expense Management
--UI Development
--designing
+
+### Yogesh B L
+- UI development
+- expense management
+- Designing
